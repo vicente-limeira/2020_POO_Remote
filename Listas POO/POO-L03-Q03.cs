@@ -4,27 +4,20 @@ class MainClass {
 // incompleto.
   public static void Main (string[] args) {
     
-    Console.WriteLine("\nCalculando Frete ...");
-    Console.WriteLine("Informe a Distancia (Km)");
-    double d = double.Parse(Console.ReadLine());    
-    Console.WriteLine("Informe o Peso (Kg)");
-    double p = double.Parse(Console.ReadLine());
+    Conversor conversor;
 
-    Frete f = new Frete(d, p);
-    
-    Console.WriteLine("---------------------------\n");
-    Console.WriteLine($"Distancia: {f.GetDistancia():0.00}");
-    Console.WriteLine($"Peso: {f.GetPeso():0.00}");
-    Console.WriteLine($"Valor do Frete: R$ {f.CalcFrete():0.00}");
+    Console.WriteLine("\nConvertendo numero em codigo decimal para binario ...");
+    while (true) {
+      Console.WriteLine("\nInforme um numero");
+      int n = int.Parse(Console.ReadLine());    
+      if (n == 0) break;
 
-    Console.WriteLine("---------------------------\n");
-    f.SetDistancia(d*10);
-    f.SetPeso(p*3);
-    Console.WriteLine($"Valores modificados para:\n{f}");
+      conversor = new Conversor(n);
+      Console.WriteLine($"{conversor}\n");
+      Console.WriteLine("---------------------------");    
+    }
 
-    Console.WriteLine($"Valor do Frete: {f.CalcFrete():0.00}");
-
-    Console.WriteLine("---------------------------\n");    
+   
 
     return;
   }
@@ -40,7 +33,7 @@ class Conversor {
     return;
   }
 
-  public double GetNum() {
+  public int GetNum() {
     return num;
   }
 
@@ -50,26 +43,24 @@ class Conversor {
   }
 
   public string Binario() {
-    int resto, q;
-    string result = "";
-    for (i=0;i!=num) {
-        q = resto / 2;
-        resto = resto % 2;
+    int resto = 1, quociente = num, n = num;
+    char[] r = new char[16];;
 
-    } while ();
+    for (int i=0; i<16; i++) {
+        quociente = n / 2;
+        resto = n % 2;
+        r[i]=char.Parse(resto.ToString());
+        n = quociente;
+    }
 
-    return "*";
+    Array.Reverse(r);
+    string result = new String(r);
+    return result;
   }
+
 
   public override string ToString() {
-    return $"O numero {num:0.00} em codigo binario eh {Binario()}.";
+    return $"O numero {num} em codigo binario eh {Binario()}";
   }
 
-  void ConvertToBinary(int n)
-{
-    if (n / 2 != 0) {
-        ConvertToBinary(n / 2);
-    }
-    printf("%d", n % 2);
-}
 }
