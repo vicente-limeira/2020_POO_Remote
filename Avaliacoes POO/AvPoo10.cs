@@ -13,21 +13,21 @@ class MainClass {
     
     Console.WriteLine($"\n{c.Count} alunos.\n---------------------");
     foreach(Aluno aluno in c.Listar()) Console.WriteLine(aluno);
-    
+
     c.Sort();
     Console.WriteLine($"\n{c.Count} alunos.\n---------------------");    
     foreach(Aluno aluno in c.Listar()) Console.WriteLine(aluno);
 
+    Console.WriteLine($"\nRemovendo {a1.Nome} ...");
     c.Remove(a1);
     Console.WriteLine($"\n{c.Count} alunos.\n---------------------");    
     foreach(Aluno aluno in c.Listar()) Console.WriteLine(aluno);
 
-    c.Add(a1);
+    c.Add(a4);
     Console.WriteLine($"\n{c.Count} alunos.\n---------------------");    
     foreach(Aluno aluno in c.Listar()) Console.WriteLine(aluno);    
   }
 }
-
 
 class Aluno : IComparable<Aluno> {
   public  string Nome {get; set;}
@@ -45,9 +45,9 @@ class Aluno : IComparable<Aluno> {
 }
 
 //-----------------------------------------
-class Colecao<T> : IEnumerable {
+class Colecao<T> : IEnumerable where T : IComparable<T>{
   
-  private T[] objs = new T[10];
+  public T[] objs = new T[10];
   private int k = 0;
 
   public int Count {
@@ -73,21 +73,28 @@ class Colecao<T> : IEnumerable {
   }
 
   public void Remove(T obj) {
-  
+
     if (this.k > 0) {
       int j=0;
       T[] _objs = new T[this.k];
-      for (int i =0; i<this.k; i++)
-        if (this.objs[i].CompareTo(obj) != 0)
+      for (int i=0; i<this.k; i++) {
+        //if (this.objs[i] != obj) Não funciona para T.
+        if (!this.objs[i].Equals(obj))
           _objs[j++] = this.objs[i];
-      Array.Copy(_objs,this.obj,_objs.Length);
+      }
+      this.k=j;
+      Array.Copy(_objs,this.objs,this.k);
     }
-
     return;
   }
 
   public void Sort() {
-    Array.Sort(this.objs);
+
+    T[] result = new T[this.k];
+    result = Listar();
+    Array.Sort(result);
+    Array.Copy(result, this.objs, this.k);
+ 
     return;
   }
 
