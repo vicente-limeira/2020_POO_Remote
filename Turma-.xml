@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Turma xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Alunos>
+    <Aluno>
+      <Nome>Vicente</Nome>
+      <Matricula>1</Matricula>
+      <Email>1</Email>
+      <Ira>1</Ira>
+    </Aluno>
+  </Alunos>
+</Turma>
